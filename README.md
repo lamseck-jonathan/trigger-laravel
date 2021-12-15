@@ -1,5 +1,7 @@
 ## Installation
 
+cloner le projet puis entrer dans le dossier et taper le commande ci-dessous
+
 ```bash
 $ composer install
 ```
