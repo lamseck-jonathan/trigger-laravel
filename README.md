@@ -12,3 +12,8 @@ $ composer install
 $ php artisan serve
 
 ```
+## Create the file .env
+
+copy the file .env.exemple and rename in .env
+
+
