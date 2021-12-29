@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/vendeurs', [VendeurController::class, 'get']);
+Route::get('/vendeur', [VendeurController::class, 'get']);
+Route::post('/vendeur', [VendeurController::class, 'store']);
