@@ -19,5 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/vendeur', [VendeurController::class, 'get']);
+Route::get('/vendeur', [VendeurController::class, 'findAll']);
+Route::get('/vendeur/{id}', [VendeurController::class, 'findOne']);
 Route::post('/vendeur', [VendeurController::class, 'store']);
+Route::patch('/vendeur/{id}', [VendeurController::class, 'update']);
+Route::delete('/vendeur/{id}', [VendeurController::class, 'delete']);
