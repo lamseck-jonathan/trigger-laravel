@@ -18,8 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::apiResources([
-    'vendeurs' => VendeurController::class
-]);
+//All routes which need that the user must be authenticated
+Route::middleware('auth:sanctum')->group(function() {
+    Route::apiResources([
+        'vendeurs' => VendeurController::class
+    ]);
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+});

@@ -81,7 +81,7 @@ class AuthController extends Controller
             return $this->error($e,500);
         }
 
-        return $this->success([], 'Deconnexion effectuée et toout les tokens sont supprimés avec succès');
+        return $this->success([], 'Deconnexion effectuée avec succès, tous les tokens ont été supprimé');
     }
 
 }
