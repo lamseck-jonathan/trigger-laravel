@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VendeurController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*

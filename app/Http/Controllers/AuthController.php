@@ -7,7 +7,6 @@ use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Throwable;
 
 class AuthController extends Controller
 {
@@ -16,10 +15,10 @@ class AuthController extends Controller
     public function register(Request $request) {
         
         $validatedData = $request->validate([
-            'name' => ['required'],
+            'name' => ['required', 'unique:users'],
             'password' => ['required', 'min:6'],
             'isAdmin' => ['boolean']
-        ]);   
+        ]);
 
         //Hash::make will encrypt the password before saving it in the database
         $user = User::create([
@@ -72,14 +71,9 @@ class AuthController extends Controller
     }
 
     public function logout() {
-        try {
-            //revoke all tokens
-            $user = User::find(Auth::id());
-            $user->tokens()->delete();
-
-        } catch (Throwable $e) {
-            return $this->error($e,500);
-        }
+        //revoke all tokens
+        $user = User::find(Auth::id());
+        $user->tokens()->delete();
 
         return $this->success([], 'Deconnexion effectuée avec succès, tous les tokens ont été supprimé');
     }
