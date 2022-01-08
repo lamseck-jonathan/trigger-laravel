@@ -6,45 +6,20 @@ Clone the project, open terminal, go to the project path ...
 $ composer install
 ```
 
+## Create the file .env
+
+Copy the file .env.exemple and rename in .env
+
+##  Migrate and seed database
+
+```bash
+$ php artisan migrate --seed
+```
+
 ## Running the app
 
 ```bash
 $ php artisan serve
-
-```
-## Create the file .env
-
-copy the file .env.exemple and rename in .env
-
-## First running
-
-### Setup database connection
-
-We are using MongoDB, so in order to use it with Laravel, we have to add a mongoDB driver for php.
-
-Follow these steps :
-+ Download the mongoDB PHP driver at this link :
-
-  [MongoDB PHP driver Link](https://www.php.net/manual/fr/mongodb.setup.php)
-  
-+ Go to your php.ini and add your driver :
-
-```bash
-extension=mongodb 
-
-```
-
-### Migrate database
-
-```bash
-$ php artisan migrate
-
-```
-
-### Seed database
-
-```bash
-$ php artisan db:seed
 
 ```
 
