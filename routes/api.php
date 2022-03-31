@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RecetteJourController;
 use App\Http\Controllers\VendeurController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,12 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::apiResources([
         'vendeurs' => VendeurController::class
     ]);
+
+    Route::get('/recettejour',[RecetteJourController::class,'index']);
+    Route::post('/recettejour',[RecetteJourController::class,'store']);
+    Route::get('/recettejour/{id}',[RecetteJourController::class,'show']);
+    Route::put('/recettejour/{id}',[RecetteJourController::class,'update']);
+    Route::delete('/recettejour/{id}',[RecetteJourController::class,'destroy']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
