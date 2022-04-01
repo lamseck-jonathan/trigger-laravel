@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\RecetteVendeurs;
 
 class Vendeur extends Model
 {
@@ -20,6 +21,11 @@ class Vendeur extends Model
 
     public function setVdNameAttribute($value) {
         $this->attributes['vd_name'] = strtolower($value);
+    }
+
+    public function recette_vendeurs()
+    {
+        return $this->hasMany(RecetteVendeurs::class);
     }
 
 }
