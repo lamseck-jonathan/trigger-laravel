@@ -31,5 +31,5 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/recettejour/{id}',[RecetteJourController::class,'update']);
     Route::delete('/recettejour/{id}',[RecetteJourController::class,'destroy']);
 
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::delete('/logout', [AuthController::class, 'logout']);
 });
