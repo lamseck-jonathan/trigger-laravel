@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Vendeur;
+use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class VendeurController extends Controller
 {
+    use ApiResponser;
+
     /**
      * Display a listing of the resource.
      *
@@ -30,12 +34,21 @@ class VendeurController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json(
-            Vendeur::create([
-                'vd_name' => $request->vd_name,
-                'salaire' => $request->salaire
-            ])
-        );
+        $validation = Validator::make($request->all(), [
+            'vd_name' => 'required',
+            'salaire' => 'required'
+        ]);
+
+        if($validation->fails()) {
+            return $this->error('Données invalides', 400);
+        }
+
+        $new_vendeur = Vendeur::create([
+            'vd_name' => $request->vd_name,
+            'salaire' => $request->salaire
+        ]);
+
+        return $this->success($new_vendeur, 'Vendeur ajouté avec succès');
     }
 
     /**
@@ -60,6 +73,14 @@ class VendeurController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validation = Validator::make($request->all(), [
+            'salaire' => 'required'
+        ]);
+
+        if($validation->fails()) {
+            return $this->error('Veuillez entrer le nouveau salaire', 400);
+        }
+
         $user = User::find(Auth::id());
 
         //Creating the trigger which store vendeur->salaire update event
@@ -73,9 +94,8 @@ class VendeurController extends Controller
 
         $vendeur = Vendeur::find($id);
         $vendeur->update($request->all());
-        return response()->json(
-            $vendeur
-        );
+
+        return $this->success($vendeur, 'Salaire modifié avec succès'); 
     }
 
     /**
@@ -88,9 +108,8 @@ class VendeurController extends Controller
     {
         $vendeur = Vendeur::find($id);
         $vendeur->delete();
-        return response()->json(
-            $vendeur
-        );
+
+        return $this->success($vendeur, 'Vendeur supprimé avec succès');
     }
     
 }
