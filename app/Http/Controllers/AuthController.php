@@ -65,6 +65,12 @@ class AuthController extends Controller
         return $this->error('Mot de passe ou nom d\'utilisateur éronné', 401);
     }
 
+    public function user() {
+        $user = 'User::find(Auth::id())';
+        
+        return $this->success($user, 'Utilisateur trouvé');
+    }
+
     public function logout() {
         //revoke all tokens
         $user = User::find(Auth::id());

@@ -32,12 +32,12 @@ Route::middleware('auth:sanctum')->group(function() {
         'recette/vendeurs' => RecetteVendeursController::class
     ]);
 
-
     Route::get('/recettejour',[RecetteJourController::class,'index']);
     Route::post('/recettejour',[RecetteJourController::class,'store']);
     Route::get('/recettejour/{id}',[RecetteJourController::class,'show']);
     Route::put('/recettejour/{id}',[RecetteJourController::class,'update']);
     Route::delete('/recettejour/{id}',[RecetteJourController::class,'destroy']);
 
+    Route::get('/user', [AuthController::class, 'user']);
     Route::delete('/logout', [AuthController::class, 'logout']);
 });
