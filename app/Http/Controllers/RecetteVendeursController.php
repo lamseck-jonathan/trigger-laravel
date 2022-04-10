@@ -19,8 +19,8 @@ class RecetteVendeursController extends Controller
      */
     public function index()
     {
-        $recettes_vendeurs = RecetteVendeurs::All();
-        return $this->success($recettes_vendeurs, 'Liste de toute les recettes des vendeurs');
+        $recetteVendeur = RecetteVendeurs::with(["vendeur"])->findMany(RecetteVendeurs::all('id'));
+        return response()->json($recetteVendeur);
     }
 
     /**
@@ -46,11 +46,11 @@ class RecetteVendeursController extends Controller
 
         $new_recette_vendeurs = RecetteVendeurs::create([
             'vd_id' => $request->vd_id,
-            'rc_date' => now(),
-            'rc_montant' => $request->rc_montant
+            'rc_date' => $request->rc_date,
+            'rc_montant' => $request->rc_montant,
         ]);
 
-        return $this->success($new_recette_vendeurs, 'Recette vendeur ajouté avec succès');
+        return response()->json($new_recette_vendeurs);
     }
 
     /**
@@ -68,12 +68,13 @@ class RecetteVendeursController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RecetteVendeurs  $recetteVendeurs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RecetteVendeurs $recetteVendeurs)
+    public function update(Request $request, $id)
     {
-        //
+        $updateVendeur = RecetteVendeurs::find($id);
+        $updateVendeur->update($request->all());
+        return response()->json($updateVendeur);
     }
 
     /**
@@ -82,8 +83,10 @@ class RecetteVendeursController extends Controller
      * @param  \App\Models\RecetteVendeurs  $recetteVendeurs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RecetteVendeurs $recetteVendeurs)
+    public function destroy($id)
     {
-        //
+        $recetteVendeur = RecetteVendeurs::find($id);
+        $recetteVendeur->delete();
+        return response()->json("Suppression reussie");
     }
 }

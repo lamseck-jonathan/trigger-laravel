@@ -14,7 +14,7 @@ class RecetteJourController extends Controller
      */
     public function index()
     {
-        return response(Recette_jour::all());
+        return response()->json(Recette_jour::all());
     }
 
     /**
@@ -25,7 +25,7 @@ class RecetteJourController extends Controller
      */
     public function store(Request $request)
     {
-        return response(Recette_jour::create([
+        return response()->json(Recette_jour::create([
             "rc_date" => $request->rc_date,
             "rc_montant" => $request->rc_montant
         ]));
@@ -39,7 +39,7 @@ class RecetteJourController extends Controller
      */
     public function show($id)
     {
-        return response(Recette_jour::find($id));
+        return response()->json(Recette_jour::find($id));
     }
 
     /**
